@@ -1,4 +1,4 @@
-# mpath
+# mpath-go
 
 Golang realisation of MPTT (or modified preorder tree traversal) in materialized path way.
 
