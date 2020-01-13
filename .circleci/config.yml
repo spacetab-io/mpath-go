@@ -10,6 +10,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Create tmp directory"
+          command: |
+            mkdir -p /tmp/artifacts
+      - run:
           name: "Run tests and collect coverage reports"
           command: |
             go mod vendor
