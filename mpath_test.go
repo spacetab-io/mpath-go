@@ -1,6 +1,8 @@
 package mpath
 
 import (
+	"fmt"
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -217,4 +219,46 @@ func TestInitTree(t *testing.T) {
 			t.FailNow()
 		}
 	})
+}
+
+func ExampleInitTree() {
+	itemsFull = &TestItems{
+		{ID: 1, Position: 0, Name: "item 1", Path: []uint64{1}},
+		{ID: 2, Position: 0, Name: "item 2", Path: []uint64{1, 2}},
+		{ID: 3, Position: 1, Name: "item 3", Path: []uint64{1, 3}},
+		{ID: 4, Position: 0, Name: "item 4", Path: []uint64{1, 2, 4}},
+		{ID: 5, Position: 1, Name: "item 5", Path: []uint64{1, 2, 5}},
+		{ID: 6, Position: 0, Name: "item 6", Path: []uint64{1, 3, 6}},
+	}
+
+	var parent = TestItem{}
+	if err := InitTree(&parent, itemsFull); err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Println("Tree view:")
+	showResult(parent, "")
+	// Output:
+	// Tree view:
+	//  id: 1, name: item 1, position: 0
+	//  siblings:
+	//   id: 2, name: item 2, position: 0
+	//   siblings:
+	//    id: 4, name: item 4, position: 0
+	//    siblings:
+	//    id: 5, name: item 5, position: 1
+	//    siblings:
+	//   id: 3, name: item 3, position: 1
+	//   siblings:
+	//    id: 6, name: item 6, position: 0
+	//    siblings:
+}
+
+func showResult(parent TestItem, padding string) {
+	padding += " "
+	fmt.Printf("%sid: %d, name: %s, position: %d\n", padding, parent.ID, parent.Name, parent.Position)
+	fmt.Printf("%ssiblings:\n", padding)
+	for _, ti := range parent.Siblings {
+		showResult(*ti, padding)
+	}
 }

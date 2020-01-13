@@ -1,5 +1,9 @@
 # mpath-go
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/spacetab-io/mpath-go)](https://goreportcard.com/report/github.com/spacetab-io/mpath-go) 
+[![CircleCI](https://circleci.com/gh/spacetab-io/mpath-go.svg?style=shield)](https://circleci.com/gh/spacetab-io/mpath-go)
+[![codecov](https://codecov.io/gh/spacetab-io/mpath-go.svg/graph/badge.svg)](https://codecov.io/gh/spacetab-io/mpath-go)
+
 Golang realisation of MPTT (or modified preorder tree traversal) in materialized path way.
 
 ## About
